@@ -1,0 +1,1 @@
+ALTER USER 'root'@'localHost' identified with mysql_native_password BY '@3456tfC()';
