@@ -1,17 +1,39 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
-from .forms import UserRegisterForm
+from django.contrib.auth import get_user_model
+from rest_framework import generics, status
+from rest_framework.permissions import (
+   AllowAny,
+   IsAuthenticated,
+   IsAdminUser,
+   IsAuthenticatedOrReadOnly,
+)
+from .serializer import RegisterSerializer, UserLoginSerializer
+from rest_framework.response import Response
+#create your views here
 
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}')
-            return redirect('home-page')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+class RegisterView(generics.CreateAPIView):
+   serializer_class = RegisterSerializer
+   User = get_user_model()
+   queryset = User.objects.all()
 
+""" def post(self, request):
+        user = request.data
+        serializer = self.serializer_class(data=user)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        user_data = serializer.data
+
+        return Response(user_data,status=status.HTTP_201_CREATED) """
+
+class UserLoginView(generics.GenericAPIView):
+   permission_classes = [AllowAny]
+   serializer_class = UserLoginSerializer
+
+   def post(self,request):
+      data = request.data
+      serializer = UserLoginSerializer(data=data)
+
+      if serializer.is_valid(raise_exception=True):
+         new_data = serializer.data
+         return Response(new_data, status=status.HTTP_200_OK)
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
