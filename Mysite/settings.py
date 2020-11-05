@@ -27,13 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL =  'users.Custom_User'
+
 
 # Application definition
 
 INSTALLED_APPS = [
-    'web_app.apps.WebAppConfig',
-    'users.apps.UsersConfig',
     'crispy_forms', 
+    'rest_framework',
+    'users',
+    'web_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
