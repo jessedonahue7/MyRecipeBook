@@ -20,4 +20,5 @@ from users import views as user_views
 urlpatterns = [
     path('auth/', include('users.urls')),
     path('admin/', admin.site.urls),
+    path(' ',include('web_app.urls')),
 ]
