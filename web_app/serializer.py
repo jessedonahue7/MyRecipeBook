@@ -1,4 +1,4 @@
-from rest_framework import serializers
+'''from rest_framework import serializers
 from .models import Custom_User
 from django.db.models import Q
 from .models import Recipe
@@ -16,4 +16,4 @@ class SearchResultsView(ListView):
         object_list = Recipe.objects.filter(
             Q(Name__icontains=query) | Q(Ingredients__icontains=query)
         )
-        return object_list
+        return object_list'''

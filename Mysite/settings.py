@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'users',
     'web_app',
+    'recipe',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -83,7 +84,7 @@ WSGI_APPLICATION = 'Mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'my_recipe', 
+        'NAME' : 'sitedb', 
         'USER' : 'root',
         'PASSWORD' : '@3456tfC()',
         'HOST' : 'localHost',
