@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import generics, status
+from django.contrib import auth
+from django_project import helpers
 from rest_framework.permissions import (
    AllowAny,
    IsAuthenticated,
@@ -37,3 +39,8 @@ class UserLoginView(generics.GenericAPIView):
          new_data = serializer.data
          return Response(new_data, status=status.HTTP_200_OK)
       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+ def logout_request(request):
+        logout(request)
+    messages.info(request, "Logged out successfully!")
+    return redirect("main:homepage")
