@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Custom_User
 from django.db.models import Q
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
 class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -73,3 +74,24 @@ class UserLoginSerializer(serializers.ModelSerializer):
         
         data["tokens"] = user_obj.tokens
         return data
+
+class LogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
+    default_error_messages = {
+        'bad_token': ('Token is expired or invalid. Being Logged out')
+    }
+
+    def validate(self, attrs):
+        self.token = attrs['refresh']
+
+        return attrs
+
+    def save(self, **kwargs):
+        try:
+            RefreshToken(self.token).blacklist()
+
+        except TokenError:
+            self.fail('bad_token')
+
+    
+

@@ -38,6 +38,7 @@ class Recipe(models.Model):
     cook_time = models.IntegerField()
     ingredients = models.ManyToManyField('Ingredient')
     tags = models.ManyToManyField('Tag')
+    slug = models.SlugField(max_length=50, blank=False, default='title')
     url = models.CharField(max_length=255, blank=True)
     #image = models.ImageField(null=True, )
 

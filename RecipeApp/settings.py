@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'users',
     'recipe',
     'django_mysql',
+    'drf_yasg',
+    'rest_framework_simplejwt.token_blacklist',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,6 +47,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+SWAGGER_SETTINGS={
+    'SECURITY_DEFINITIONS' : {
+        'Bearer':
+        {
+            'type' : 'apiKey',
+            'name' : 'Authorization',
+            'in' : 'header'
+        }
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
