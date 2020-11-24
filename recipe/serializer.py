@@ -4,7 +4,7 @@ from .models import Recipe, Tag, Ingredient
 
 recipe_detail_url = serializers.HyperlinkedIdentityField(
     view_name='detail',
-    lookup_field='title'
+    lookup_field='slug'
 )
 
 class TagSerializer(serializers.ModelSerializer):
@@ -20,8 +20,8 @@ class IngredientSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 class RecipeSerializer(serializers.ModelSerializer):
-    ingredients = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    tags = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    ingredients = serializers.PrimaryKeyRelatedField(many=True, queryset=Ingredient.objects.all())
+    tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
     url = recipe_detail_url
     class Meta:
         model = Recipe
@@ -30,8 +30,15 @@ class RecipeSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ('id',)
 
-class RecipeDetailSerializer(RecipeSerializer):
+class RecipeDetailSerializer(serializers.ModelSerializer):
     """Serialize a recipe detail"""
-    user = UserDetailSerializer(read_only=True)
+    #user = UserDetailSerializer(read_only=True)
     ingredients = IngredientSerializer(many=True, read_only=True)
     tags = TagSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Recipe
+        fields = (
+            'id', 'ingredients', 'tags'
+        )
+        read_only_fields = ('id',)
