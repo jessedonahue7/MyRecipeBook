@@ -12,7 +12,7 @@ from .pagination import RecipeLimitOffsetPagination, RecipePageNumberPagination
 class RecipeCreateAPIView(generics.CreateAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
-    permission_classes = [AllowAny] #[IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -39,7 +39,7 @@ class RecipeListAPIView(generics.ListAPIView):
 class RecipeDetailAPIView(generics.RetrieveAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeDetailSerializer
-    lookup_field = 'slug'
+    #lookup_field = 'slug'
 
 class RecipeUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = Recipe.objects.all()
