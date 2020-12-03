@@ -1,0 +1,54 @@
+
+form , body{
+  /*margin: 10% 5% 10% 5%;*/
+  border-width: 5px;
+  border-style: double;
+  background-image: url("src/assets/img/recipe2.jpg");
+}
+
+.card{
+  /*margin: 10% 5% 10% 5%;*/
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  background-color: black;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type=ingredients] {
+  width: 100%;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+.designingrecipe{
+  padding: 2%;
+}
+
+
+

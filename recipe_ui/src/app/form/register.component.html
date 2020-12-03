@@ -1,0 +1,36 @@
+<form [formGroup]="registerForm" method="get" action="javascript: void(0);" id="register-form" class="register-form"
+      autocomplete="off" role="main">
+  <div class="container">
+    <h1><span style="font-family:Lucida Fax"><b><I>Register</I></b></span></h1>
+    <div class="imgcontainer">
+      <img src="assets/img/login/login.jpg" alt="Avatar" class="avatar">
+    </div>
+    <p class="text-danger text-nowrap">{{ errorMsg }}</p>
+    <label for="username">Username</label>
+    <input type="username" class="form-control" formControlName="username" id="username" aria-describedby="emailHelp"
+           placeholder="Enter email">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" formControlName="email" id="email" aria-describedby="emailHelp"
+           placeholder="Enter email">
+    <div *ngIf="email.invalid && email.touched" class="alert alert-danger">email is required</div>
+    <label for="password">Password</label>
+    <input type="password" class="form-control" formControlName="password" id="password"
+           [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password">
+    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+      <div *ngIf="f.password.errors.required">Password is required</div>
+      <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters</div>
+    </div>
+  </div>
+  <div class="check-box">
+    <label><input type="checkbox" name="remember">Remember me</label>
+  </div>
+  <div class="container">
+    <button type="submit" class="btn-btn-info" (click)="registerUser()">Register</button>
+    <small class="align-content-center" routerLink="/form-component" class="btn btn-link">cancel</small>
+  </div>
+</form>
+
+
+
+
+

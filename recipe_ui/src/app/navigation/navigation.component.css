@@ -1,0 +1,36 @@
+/*h1 {*/
+/*	text-align: center;*/
+/*	margin: 40px 0 40px;*/
+/*	text-align: center;*/
+/*	font-size: 40px;*/
+/*	color:rgb(0, 4, 255);*/
+/*	font-family: 'Cherry Swash', cursive;*/
+/*}*/
+
+
+
+
+/*a:nth-child(1) {*/
+/*	width: 100px;*/
+/*}*/
+/*a:nth-child(2) {*/
+/*	width: 110px;*/
+/*}*/
+/*a:nth-child(3) {*/
+/*	background-color: aqua;*/
+/*	padding: 10px 15px;*/
+/*	font-weight: bolder;*/
+/*	color: maroon;*/
+/*	width: 100px;*/
+/*}*/
+
+.nav-full-w{
+  margin: 0;
+  padding: 0px 5cm 0px 5cm;
+}
+a{
+  font-size: 30px;
+  font-color: black;
+}
+
+

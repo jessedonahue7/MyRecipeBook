@@ -1,0 +1,69 @@
+<script src="../users.service.ts"></script>
+<div class="container designingrecipe overflow-auto">
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="recipeForm" method="get" action="javascript: void(0);" id="recipe-form" class="recipe-form"
+            autocomplete="off" role="main">
+        <div class="container">
+          <h1><span style="font-family: 'Arial Hebrew'"><I>Create your own Recipe</I></span></h1>
+          <div class="container">
+            <label for="title">Enter Recipe title</label>
+            <input type="text" formControlName="title" placeholder="Recipe title" class="form-control" id="title"
+                   tabindex="2" required>
+
+            <label>Enter or select your Ingredients</label>
+            <div class="input-group">
+              <ng-select
+                [items]="listOfIngredients"
+                [multiple]="true"
+                bindLabel="name"
+                placeholder="Select Ingredients"
+                [addTag]="addNewIngrdeient"
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="selectedIds">
+              </ng-select>
+            </div>
+            <label>Enter or select your Tags</label>
+            <div class="input-group">
+
+              <ng-select [items]="listOfTags"
+                         bindLabel="name"
+                         placeholder="Select Tags"
+                         appendTo="body"
+                         [multiple]="true"
+                         [addTag]="addNewTags"
+                         [ngModelOptions]="{standalone: true}"
+                         [(ngModel)]="newTags">
+              </ng-select>
+            </div>
+
+            <label for="prep_time">Enter prep_Time</label>
+            <input type="number" formControlName="prep_time" placeholder="Recipe prep_Time" class="form-control"
+                   id="prep_time" tabindex="6"
+                   required>
+            <label for="cook_time">Enter cook_time</label>
+            <input type="number" formControlName="cook_time" placeholder="Recipe cook_time" class="form-control"
+                   id="cook_time" tabindex="7"
+                   required>
+          </div>
+          <div class="container savingrecipe">
+            <button type="submit" (click)="updateRecipe()">Save Recipe</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col ">
+
+      <div *ngFor="let rec of recipeList">
+
+
+        <app-recipedisplay [hero]="rec" [ings]="getIngredientsNames(rec.ingredients)"
+                           [tags]="getTagsNames(rec.tags)"></app-recipedisplay>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

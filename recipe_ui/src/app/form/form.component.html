@@ -1,0 +1,43 @@
+<div id="topbar">
+  <form [formGroup]="loginForm" method="get" action="javascript: void(0);" id="login-form" class="login-form  someclass"
+        autocomplete="off" role="main">
+
+    <div class="container">
+
+      <h1 class="login"><span style="font-family:Lucida Fax"><b><I>Login</I></b></span></h1>
+      <div class="imgcontainer">
+        <img src="assets/img/login/login.jpg" alt="Avatar" class="avatar">
+      </div>
+      <div class="container">
+        <p class="text-danger text-nowrap">{{ errorMsg }}</p>
+        <label for="username">Username</label>
+        <input type="text" class="form-control" formControlName="username" id="username" placeholder="Enter username"
+               required>
+
+        <label for="email">Email address</label>
+        <input type="text" class="form-control" formControlName="email" id="email" placeholder="Enter email" required>
+        <div *ngIf="f.email.touched && f.email.invalid" class="alert alert-danger">
+          <div *ngIf="f.email.errors.required">Email is required.</div>
+          <div *ngIf="f.email.errors.email">Please, enter valid email address.</div>
+          email is required.
+        </div>
+
+        <label for="password">Password</label>
+        <input type="password" class="form-control" formControlName="password" id="password"
+               placeholder="Enter password" required minlength="8">
+      </div>
+      <div class="container">
+        <button type="submit" class="btn-btn-info" (click)="loginUser()">Login</button>
+        <small class="text-center" routerLink="../user/register" class="btn btn-link">New user? Register here</small>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<pre>
+    {{ json }}
+  </pre>
+
+
+
