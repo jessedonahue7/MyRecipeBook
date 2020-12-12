@@ -4,7 +4,7 @@ from .models import Recipe, Tag, Ingredient
 
 recipe_detail_url = serializers.HyperlinkedIdentityField(
     view_name='detail',
-    #lookup_field='slug'
+    lookup_field='slug'
 )
 
 class TagSerializer(serializers.ModelSerializer):
@@ -22,23 +22,34 @@ class IngredientSerializer(serializers.ModelSerializer):
 class RecipeSerializer(serializers.ModelSerializer):
     ingredients = serializers.PrimaryKeyRelatedField(many=True, queryset=Ingredient.objects.all())
     tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
-    #url = recipe_detail_url
+    url = recipe_detail_url
     class Meta:
         model = Recipe
         fields = (
-             'id', 'title', 'ingredients', 'tags', 'prep_time', 'cook_time'#, 'url',
+             'id', 'title', 'ingredients', 'tags', 'prep_time', 'cook_time', 'image', 'url',
         )
         read_only_fields = ('id',)
 
 class RecipeDetailSerializer(serializers.ModelSerializer):
     """Serialize a recipe detail"""
-    #user = UserDetailSerializer(read_only=True)
+    user = UserDetailSerializer(read_only=True)
     ingredients = IngredientSerializer(many=True, read_only=True)
     tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
         model = Recipe
         fields = (
-            'id', 'ingredients', 'tags'
+             'user', 'ingredients', 'tags', 'prep_time', 'cook_time'
         )
-        read_only_fields = ('id',)
+        read_only_fields = ('user',)
+
+class RecipeEditSerializer(serializers.ModelSerializer):
+    ingredients = serializers.PrimaryKeyRelatedField(many=True, queryset=Ingredient.objects.all())
+    tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
+    url = recipe_detail_url
+    class Meta:
+        model = Recipe
+        fields = (
+             'id', 'title', 'ingredients', 'tags', 'prep_time', 'cook_time', 'url',
+        )
+        read_only_fields = ('id', 'url')

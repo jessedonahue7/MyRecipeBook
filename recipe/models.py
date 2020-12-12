@@ -1,5 +1,7 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from users.models import Custom_User
+from rest_framework.reverse import reverse
 
 User = Custom_User
 
@@ -26,6 +28,9 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
 
+def upload_location(instance, filename):
+    return "%s/%s" %(instance, filename)
+
 
 class Recipe(models.Model):
     """Recipe object"""
@@ -38,9 +43,18 @@ class Recipe(models.Model):
     cook_time = models.IntegerField()
     ingredients = models.ManyToManyField('Ingredient')
     tags = models.ManyToManyField('Tag')
-    slug = models.SlugField(max_length=50, blank=False, default='title')
-    url = models.CharField(max_length=255, blank=True)
-    #image = models.ImageField(null=True, )
-
+    slug = models.SlugField(max_length=50, null=False, unique=True)
+    image = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
+    
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("detail", kwargs={"slug": self.slug})
+
+    def save(self, *args, **kwargs): # new
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
