@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 from users import views as user_views
 from recipe import views as recipe_views
 
@@ -46,8 +48,5 @@ urlpatterns = [
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
 
-'''
-curl \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjA1ODk5MjIyLCJqdGkiOiJlZTI3MWJiNDg0ZWU0YWNiYThjNWIyOWRhOTQ4OTY3MSIsInVzZXJfaWQiOjR9.pGMRLtcfbW6mrPM0lzjJs0SU4VO7gCWW79tPf0zkF4w" \http://127.0.0.1/:8000/api/some-protected-view/token/
-
-'''
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

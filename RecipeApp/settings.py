@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import datetime
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django_mysql',
     'drf_yasg',
     'rest_framework_simplejwt.token_blacklist',
+    #S'pillow',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -96,7 +98,7 @@ WSGI_APPLICATION = 'RecipeApp.wsgi.application'
 DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'app_db', 
+        'NAME' : 'appdb', 
         'USER' : 'root',
         'PASSWORD' : '@3456tfC()',
         'HOST' : 'localHost',
@@ -143,6 +145,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static"),
+]
+
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_media")
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
+MEDIA_URL = "/media/"
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [

@@ -2,9 +2,11 @@ from django.db.models import Q
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework import generics
 from rest_framework import viewsets, mixins, status
+from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from .models import Recipe, Tag, Ingredient
-from .serializer import RecipeSerializer, RecipeDetailSerializer, TagSerializer, IngredientSerializer
+from .serializer import RecipeSerializer, RecipeDetailSerializer, RecipeEditSerializer, TagSerializer, IngredientSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
 from .pagination import RecipeLimitOffsetPagination, RecipePageNumberPagination
@@ -12,6 +14,7 @@ from .pagination import RecipeLimitOffsetPagination, RecipePageNumberPagination
 class RecipeCreateAPIView(generics.CreateAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
+    parser_classes = [MultiPartParser, FormParser]
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -39,16 +42,17 @@ class RecipeListAPIView(generics.ListAPIView):
 class RecipeDetailAPIView(generics.RetrieveAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeDetailSerializer
-    #lookup_field = 'slug'
+    lookup_field = 'slug'
 
 class RecipeUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = Recipe.objects.all()
-    serializer_class = RecipeDetailSerializer
+    serializer_class = RecipeEditSerializer
     lookup_field = 'slug'
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     def perform_update(self, serializer):
         serializer.save(user=self.request.user)
+        print(self.request.user)
 
 class RecipeDeleteAPIView(generics.DestroyAPIView):
     queryset = Recipe.objects.all()
