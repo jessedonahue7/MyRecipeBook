@@ -4,3 +4,12 @@
 /* Made with love by Mutiullah Samim*/
 
 @import "~@ng-select/ng-select/themes/material.theme.css";
+
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arapey:ital@1&display=swap');
+
+html{
+  font-family: 'Pacifico', cursive;
+  font-family: 'PT Serif', serif;
+  font-family: 'Arapey', serif;
+}

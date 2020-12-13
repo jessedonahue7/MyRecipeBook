@@ -42,7 +42,6 @@ export class RegisterComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   async registerUser() {
-    console.log(this.registerForm.value);
     if (!this.registerForm.valid) {
       this.errorMsg = "Please fill in correct credentials";
       return;
@@ -58,7 +57,7 @@ export class RegisterComponent implements OnInit {
       this.errorMsg = "Wrong";
       return;
     } else {
-      this.router.navigate(['/form-component'])
+      this.router.navigate(['/login'])
     }
   }
 

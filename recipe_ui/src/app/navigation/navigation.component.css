@@ -1,36 +1,46 @@
-/*h1 {*/
-/*	text-align: center;*/
-/*	margin: 40px 0 40px;*/
-/*	text-align: center;*/
-/*	font-size: 40px;*/
-/*	color:rgb(0, 4, 255);*/
-/*	font-family: 'Cherry Swash', cursive;*/
-/*}*/
 
-
-
-
-/*a:nth-child(1) {*/
-/*	width: 100px;*/
-/*}*/
-/*a:nth-child(2) {*/
-/*	width: 110px;*/
-/*}*/
-/*a:nth-child(3) {*/
-/*	background-color: aqua;*/
-/*	padding: 10px 15px;*/
-/*	font-weight: bolder;*/
-/*	color: maroon;*/
-/*	width: 100px;*/
-/*}*/
-
-.nav-full-w{
-  margin: 0;
-  padding: 0px 5cm 0px 5cm;
-}
-a{
-  font-size: 30px;
-  font-color: black;
+a span{
+  font-size: 25px;
+  color: darkgreen;
 }
 
+.navbar{
+ /*border-bottom: 1px solid black;*/
+  padding-bottom:20px;
+}
+i {
+  margin-right: 10px;
+}
+.right{
+  float: right;
+}
+.searchContainer {
+  display: inline-flex;
+  flex: 1 1 300px;
+  position: relative;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.searchIcon {
+  padding: 0.5rem;
+  background-color: white;
+  margin-right: 0px;
+}
+
+.searchBox {
+  border: 0;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  flex: 1;
+}
+
+.searchButton {
+  background: darkgreen;
+  border: 0;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0;
+}
 

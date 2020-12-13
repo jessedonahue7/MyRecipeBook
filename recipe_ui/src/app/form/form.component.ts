@@ -31,7 +31,7 @@ export class FormComponent {
   constructor(private fb: FormBuilder, private usersService: UsersService, private http: HttpClient, private router: Router) {
   }
 
-  get f(){
+  get f() {
     return this.loginForm.controls;
   }
 
@@ -53,7 +53,7 @@ export class FormComponent {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
     };
-    const resp = await this.usersService.loginUser(newUser);
+    const resp = await this.usersService.loginUser(newUser, true);
     if (resp['tokens'] == "") {
       this.errorMsg = "Wrong credentials";
       return;

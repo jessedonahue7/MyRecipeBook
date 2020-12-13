@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {UsersService} from "../users.service";
+
 
 @Component({
   selector: 'app-navigation',
@@ -8,15 +10,24 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
   name;
+  searchText = "";
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private router: Router,private user: UsersService) {
 
+  }
+
+
+
+  getSearchText(val) {
+    let search = "/search/" + val
+    this.router.navigate([search]);
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.name = params['name'];
-    });
   }
 
+  logOut(){
+    this.user.logUserOut();
+    this.router.navigate(['']);
+  }
 }

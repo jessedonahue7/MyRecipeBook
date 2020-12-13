@@ -17,6 +17,8 @@ import { MyrecipeComponent } from './myrecipe/myrecipe.component';
 
 import { NgSelectModule } from "@ng-select/ng-select";
 import { RecipedisplayComponent } from './recipedisplay/recipedisplay.component';
+import { SearchCardsComponent } from './searchcards/search-cards.component';
+import {CookieService} from "ngx-cookie-service";
 
 
 
@@ -30,7 +32,8 @@ import { RecipedisplayComponent } from './recipedisplay/recipedisplay.component'
     CardComponent,
     JumbotronComponent,
     MyrecipeComponent,
-    RecipedisplayComponent
+    RecipedisplayComponent,
+    SearchCardsComponent
 
 
   ],
@@ -43,7 +46,8 @@ import { RecipedisplayComponent } from './recipedisplay/recipedisplay.component'
     NgSelectModule
   ],
   providers: [
-    UsersService
+    UsersService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,11 +1,12 @@
 
 body{
   background-image: url("src/assets/img/reg.jpg");
+
 }
 form {
-  background-color: white;
+  background-color: transparent;
   margin: 3% 35% 5% 35%;
-  border-style: double;
+  border-style: groove;
 }
 
 h1 {
@@ -27,13 +28,14 @@ img.avatar {
 
 /* Set a style for all buttons */
 button {
-  background-color: lightskyblue;
+  background-color: coral;
   color: black;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 50%;
+
 }
 
 /* Add a hover effect for buttons */

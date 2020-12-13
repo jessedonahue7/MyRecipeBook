@@ -1,0 +1,28 @@
+<script src="../myrecipe/myrecipe.component.ts"></script>
+<div>
+  <div *ngFor="let rec of recipeList;let i = index">
+    <div *ngIf="i % 3 == 0">
+      <div class="row">
+        <div class="col">
+          <app-recipedisplay [hero]="rec" [ings]="getIngredientsNames(rec.ingredients)"
+                             [tags]="getTagsNames(rec.tags)">
+          </app-recipedisplay>
+        </div>
+        <div *ngIf="recipeList.length > i+1">
+          <div class="col">
+            <app-recipedisplay [hero]="recipeList[i+1]" [ings]="getIngredientsNames(recipeList[i+1].ingredients)"
+                               [tags]="getTagsNames(recipeList[i+1].tags)">
+            </app-recipedisplay>
+          </div>
+        </div>
+        <div *ngIf="recipeList.length > i+2">
+          <div class="col">
+            <app-recipedisplay [hero]="recipeList[i+2]" [ings]="getIngredientsNames(recipeList[i+2].ingredients)"
+                               [tags]="getTagsNames(recipeList[i+2].tags)">
+            </app-recipedisplay>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
