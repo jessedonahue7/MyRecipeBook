@@ -30,23 +30,28 @@ class IngredientSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 class RecipeListSerializer(serializers.ModelSerializer):
-    url = recipe_detail_url
+    user = UserDetailSerializer(read_only=True)
+    ingredients = serializers.PrimaryKeyRelatedField(many=True, queryset=Ingredient.objects.all())
+    tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
+    #url = recipe_detail_url
+    edit_url = recipe_edit_url
+    delete_url = recipe_delete_url
     class Meta:
         model = Recipe
         fields = (
-             'id', 'title', 'image', 'url',
+             'id', 'user', 'title', 'ingredients', 'tags', 'prep_time', 'cook_time', 'image', 'edit_url', 'delete_url'
         )
-        read_only_fields = ('id',)
+        read_only_fields = ('id', 'user', 'edit_url', 'delete_url')
 
 
 class RecipeSerializer(serializers.ModelSerializer):
     ingredients = serializers.PrimaryKeyRelatedField(many=True, queryset=Ingredient.objects.all())
     tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
-    url = recipe_detail_url
+    #url = recipe_detail_url
     class Meta:
         model = Recipe
         fields = (
-             'id', 'title', 'ingredients', 'tags', 'prep_time', 'cook_time', 'image', 'url',
+             'id', 'title', 'ingredients', 'tags', 'prep_time', 'cook_time', 'image', #'url',
         )
         read_only_fields = ('id',)
 
