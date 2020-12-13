@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 
 from .models import Recipe, Tag, Ingredient
-from .serializer import RecipeSerializer, RecipeDetailSerializer, RecipeEditSerializer, TagSerializer, IngredientSerializer
+from .serializer import RecipeSerializer, RecipeListSerializer, RecipeDetailSerializer, RecipeEditSerializer, TagSerializer, IngredientSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
 from .pagination import RecipeLimitOffsetPagination, RecipePageNumberPagination
@@ -14,7 +14,7 @@ from .pagination import RecipeLimitOffsetPagination, RecipePageNumberPagination
 class RecipeCreateAPIView(generics.CreateAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
-    parser_classes = [MultiPartParser, FormParser]
+    #parser_classes = [MultiPartParser, FormParser]
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -22,7 +22,7 @@ class RecipeCreateAPIView(generics.CreateAPIView):
         
 
 class RecipeListAPIView(generics.ListAPIView):
-    serializer_class = RecipeSerializer
+    serializer_class = RecipeListSerializer
     filter_backends = [SearchFilter]
     search_fields = ['title', 'tags__name', 'ingredients__name', 'user__username']
     pagination_class = RecipePageNumberPagination #PageNumberPagination
@@ -63,12 +63,12 @@ class RecipeDeleteAPIView(generics.DestroyAPIView):
 
 class TagViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin):
     """Manage tags in the database"""
-    permission_classes = [IsAuthenticated,]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
+        return self.queryset
     
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -76,12 +76,12 @@ class TagViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateMo
 
 class IngredientViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin):
     """Manage ingredients in the database"""
-    permission_classes = [IsAuthenticated,]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(user=self.request.user).order_by('-name')
+        return self.queryset.order_by('-name')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
