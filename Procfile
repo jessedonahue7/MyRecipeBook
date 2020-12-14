@@ -1,1 +1,1 @@
-web: python manage.py runserver 0.0.0.0:$PORT --noreload
+web: gunicorn myrecipebook1.wsgi
