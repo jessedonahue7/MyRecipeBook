@@ -43,3 +43,4 @@ uritemplate==3.0.1
 urllib3==1.26.2
 whitenoise==5.2.0
 wrapt==1.12.1
+rest_framework_simplejwt
