@@ -42,9 +42,5 @@ toml==0.10.2
 uritemplate==3.0.1
 urllib3==1.26.2
 whitenoise==5.2.0
-<<<<<<< HEAD
-wrapt==1.12.1
-=======
 wrapt==1.12.1
 rest_framework_simplejwt
->>>>>>> 701857a45f48de9479d3b59218c90218217343ff
