@@ -37,7 +37,7 @@ STATICFILES_DIRS = (
 SECRET_KEY = '-%f#+^u0#uxq0qm!$o-zvmo)&tof(t#g$n#q01v2&%&$$1o9gc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['myrecipebook1.herokuapp.com','127.0.0.1']
 
