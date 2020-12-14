@@ -20,4 +20,4 @@ whitenoise==5.2.0
 wrapt==1.12.1
 django-heroku
 drf_yasg 
-sklearn==0.23.1
+scikit-learn
